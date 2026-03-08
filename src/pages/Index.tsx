@@ -3,7 +3,6 @@ import EducationSection from "@/components/EducationSection";
 import LanguagesSection from "@/components/LanguagesSection";
 import CareerSection from "@/components/CareerSection";
 import PublicationsSection from "@/components/PublicationsSection";
-import OnlineResourcesSection from "@/components/OnlineResourcesSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import SupervisionSection from "@/components/SupervisionSection";
 import PeerReviewSection from "@/components/PeerReviewSection";
@@ -14,11 +13,10 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <HeroSection />
-      <EducationSection />
-      <LanguagesSection />
       <CareerSection />
+      <EducationSection />
       <PublicationsSection />
-      <OnlineResourcesSection />
+      <LanguagesSection />
       <ProjectsSection />
       <SupervisionSection />
       <PeerReviewSection />

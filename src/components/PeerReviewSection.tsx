@@ -1,4 +1,8 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
 const PeerReviewSection = () => {
+  const { t } = useLanguage();
+
   const conferences = [
     "PROPOR 2024 – Universidade de Santiago de Compostela",
     "XVII Fórum de Partilha Linguística (2023) – FCSH, UNL",
@@ -16,7 +20,7 @@ const PeerReviewSection = () => {
   ];
 
   const journals = [
-    { name: "Journal of Portuguese Linguistics", period: "2018 – Presente" },
+    { name: "Journal of Portuguese Linguistics", period: t("2018 – Presente", "2018 – Present") },
     { name: "Revista da APL (nº 9)", period: "2022" },
     { name: "Revista da APL (nº 8)", period: "2021" },
     { name: "International Journal of Lexicography", period: "2012" },
@@ -27,11 +31,11 @@ const PeerReviewSection = () => {
     <section className="py-20 bg-secondary/50">
       <div className="section-container">
         <div className="section-divider" />
-        <h2 className="section-title">Arbitragem Científica</h2>
+        <h2 className="section-title">{t("Arbitragem Científica", "Peer Review")}</h2>
         
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <h3 className="font-display text-lg font-semibold text-foreground mb-4">Conferências</h3>
+            <h3 className="font-display text-lg font-semibold text-foreground mb-4">{t("Conferências", "Conferences")}</h3>
             <ul className="space-y-2">
               {conferences.map((c, i) => (
                 <li key={i} className="font-body text-sm text-foreground/80 pl-4 border-l-2 border-border">{c}</li>
@@ -39,7 +43,7 @@ const PeerReviewSection = () => {
             </ul>
           </div>
           <div>
-            <h3 className="font-display text-lg font-semibold text-foreground mb-4">Revistas</h3>
+            <h3 className="font-display text-lg font-semibold text-foreground mb-4">{t("Revistas", "Journals")}</h3>
             <ul className="space-y-3">
               {journals.map((j, i) => (
                 <li key={i} className="font-body text-sm">

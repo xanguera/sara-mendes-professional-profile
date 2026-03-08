@@ -1,17 +1,20 @@
 import { Award, Star } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const AwardsSection = () => {
+  const { t } = useLanguage();
+
   const awards = [
-    { year: "2013", title: "Premi del Consell Social a la Transferència de Coneixement", area: "Comunicação e Tecnologias da Informação", org: "Universitat Pompeu Fabra – Consell Social, Espanha" },
-    { year: "1998", title: "Bolsa de Mérito", org: "Universidade de Lisboa – Reitoria" },
-    { year: "1997", title: "Bolsa de Mérito", org: "Universidade de Lisboa – Reitoria" },
+    { year: "2013", title: "Premi del Consell Social a la Transferència de Coneixement", area: t("Comunicação e Tecnologias da Informação", "Communication and Information Technologies"), org: "Universitat Pompeu Fabra – Consell Social, Espanha" },
+    { year: "1998", title: t("Bolsa de Mérito", "Merit Scholarship"), org: t("Universidade de Lisboa – Reitoria", "University of Lisbon – Rectorate") },
+    { year: "1997", title: t("Bolsa de Mérito", "Merit Scholarship"), org: t("Universidade de Lisboa – Reitoria", "University of Lisbon – Rectorate") },
   ];
 
   return (
     <section id="distincoes" className="py-20">
       <div className="section-container">
         <div className="section-divider" />
-        <h2 className="section-title">Distinções</h2>
+        <h2 className="section-title">{t("Distinções", "Awards")}</h2>
         <div className="grid md:grid-cols-3 gap-6">
           {awards.map((a, i) => (
             <div key={i} className="bg-card border border-border rounded-lg p-6 text-center hover:border-accent/50 transition-colors">
