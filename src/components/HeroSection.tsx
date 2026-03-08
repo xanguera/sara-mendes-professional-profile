@@ -1,6 +1,7 @@
-import { GraduationCap, MapPin, BookOpen, Globe } from "lucide-react";
+import { GraduationCap, MapPin, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Switch } from "@/components/ui/switch";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const HeroSection = () => {
   const { lang, setLang, t } = useLanguage();
@@ -38,6 +39,14 @@ const HeroSection = () => {
           </div>
         </div>
         <div className="flex flex-col md:flex-row items-start gap-8 md:gap-12">
+          <Avatar className="w-32 h-32 md:w-40 md:h-40 border-2 border-accent/30 shadow-lg shrink-0">
+            <AvatarImage
+              src="https://www.clul.ulisboa.pt/sites/default/files/styles/retrato_medio/public/pictures/2019-11/foto3.jpg"
+              alt="Sara Mendes"
+              className="object-cover"
+            />
+            <AvatarFallback className="text-3xl font-display bg-accent/20 text-primary-foreground">SM</AvatarFallback>
+          </Avatar>
           <div className="flex-1">
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
               Sara Mendes
