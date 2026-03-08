@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PublicationsSection = () => {
+  const { t } = useLanguage();
   const [expandedSection, setExpandedSection] = useState<string | null>("conference");
 
   const conferenceArticles = [
@@ -52,19 +54,28 @@ const PublicationsSection = () => {
     'Mendes, S. "Syntax and semantics of adjectives in portuguese: analysis and modeling". Doutoramento, 2009.',
   ];
 
+  const onlineResources = [
+    { title: "Dicionário Electrónico Português-Eslovaco/Eslovaco-Português", year: "2012", url: "http://portugal.sk/slovnik/?l=pt" },
+    { title: "CLG – Português Controlado", year: "2011", url: "https://clul.ulisboa.pt/projeto/wordnet-portcontrol-clg-portugues-controlado" },
+    { title: "Wordnet.PTglobal – Rede léxico-conceptual das variedades do Português", year: "2010", url: "http://www.clul.ul.pt/wnglobal" },
+    { title: "LexTec – Léxico Técnico do Português", year: "2009", url: "http://cvc.instituto-camoes.pt/lextec/inicio.html" },
+    { title: "TemaNet – WordNets Temáticas do Português", year: "2006", url: "http://cvc.instituto-camoes.pt/temanet/inicio.html" },
+    { title: "WordNet.PT – Rede Léxico-Conceptual do Português 1.6", year: "2006", url: "https://clul.ulisboa.pt/recurso/wordnetpt" },
+  ];
+
   const sections = [
-    { key: "conference", title: "Artigos em Conferência", items: conferenceArticles, count: conferenceArticles.length },
-    { key: "journal", title: "Artigos em Revista", items: journalArticles, count: journalArticles.length },
-    { key: "chapters", title: "Capítulos de Livro", items: bookChapters, count: bookChapters.length },
-    { key: "books", title: "Livros", items: books, count: books.length },
-    { key: "thesis", title: "Tese de Doutoramento", items: thesis, count: thesis.length },
+    { key: "conference", title: t("Artigos em Conferência", "Conference Papers"), items: conferenceArticles, count: conferenceArticles.length },
+    { key: "journal", title: t("Artigos em Revista", "Journal Articles"), items: journalArticles, count: journalArticles.length },
+    { key: "chapters", title: t("Capítulos de Livro", "Book Chapters"), items: bookChapters, count: bookChapters.length },
+    { key: "books", title: t("Livros", "Books"), items: books, count: books.length },
+    { key: "thesis", title: t("Tese de Doutoramento", "Doctoral Thesis"), items: thesis, count: thesis.length },
   ];
 
   return (
     <section id="publicacoes" className="py-20">
       <div className="section-container">
         <div className="section-divider" />
-        <h2 className="section-title">Publicações</h2>
+        <h2 className="section-title">{t("Publicações", "Publications")}</h2>
         <div className="space-y-4">
           {sections.map((section) => (
             <div key={section.key} className="border border-border rounded-lg overflow-hidden">
@@ -99,6 +110,42 @@ const PublicationsSection = () => {
               )}
             </div>
           ))}
+
+          {/* Online Resources as a sub-section */}
+          <div className="border border-border rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpandedSection(expandedSection === "resources" ? null : "resources")}
+              className="w-full flex items-center justify-between px-6 py-4 bg-card hover:bg-secondary/50 transition-colors text-left"
+            >
+              <span className="font-display text-lg font-semibold text-foreground">{t("Recursos Online", "Online Resources")}</span>
+              <span className="flex items-center gap-2">
+                <span className="text-xs font-body font-medium px-2.5 py-0.5 rounded-full bg-accent text-accent-foreground">
+                  {onlineResources.length}
+                </span>
+                <svg
+                  className={`w-4 h-4 text-muted-foreground transition-transform ${expandedSection === "resources" ? 'rotate-180' : ''}`}
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </button>
+            {expandedSection === "resources" && (
+              <div className="px-6 py-4 bg-card">
+                <ol className="space-y-3">
+                  {onlineResources.map((r, i) => (
+                    <li key={i} className="pub-item font-body text-sm text-foreground/85 leading-relaxed">
+                      <span className="text-muted-foreground mr-2">{String(i + 1).padStart(2, '0')}.</span>
+                      <a href={r.url} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                        {r.title}
+                      </a>
+                      <span className="text-muted-foreground ml-1">({r.year})</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

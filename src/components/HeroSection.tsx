@@ -1,6 +1,20 @@
-import { GraduationCap, MapPin, Mail, BookOpen } from "lucide-react";
+import { GraduationCap, MapPin, BookOpen, Globe } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Switch } from "@/components/ui/switch";
 
 const HeroSection = () => {
+  const { lang, setLang, t } = useLanguage();
+
+  const navItems = [
+    { pt: "Percurso", en: "Career" },
+    { pt: "Formação", en: "Education" },
+    { pt: "Publicações", en: "Publications" },
+    { pt: "Idiomas", en: "Languages" },
+    { pt: "Projetos", en: "Projects" },
+    { pt: "Orientações", en: "Supervision" },
+    { pt: "Distinções", en: "Awards" },
+  ];
+
   return (
     <header className="relative overflow-hidden bg-primary text-primary-foreground">
       <div className="absolute inset-0 opacity-5">
@@ -9,44 +23,62 @@ const HeroSection = () => {
         }} />
       </div>
       <div className="section-container relative py-16 md:py-24">
+        <div className="flex items-center justify-between mb-8">
+          <p className="font-body text-sm uppercase tracking-[0.2em] text-primary-foreground/60">
+            Curriculum Vitae
+          </p>
+          <div className="flex items-center gap-2 font-body text-sm text-primary-foreground/70">
+            <span className={lang === "pt" ? "text-primary-foreground font-medium" : ""}>PT</span>
+            <Switch
+              checked={lang === "en"}
+              onCheckedChange={(checked) => setLang(checked ? "en" : "pt")}
+              className="data-[state=checked]:bg-accent data-[state=unchecked]:bg-primary-foreground/20"
+            />
+            <span className={lang === "en" ? "text-primary-foreground font-medium" : ""}>EN</span>
+          </div>
+        </div>
         <div className="flex flex-col md:flex-row items-start gap-8 md:gap-12">
           <div className="flex-1">
-            <p className="font-body text-sm uppercase tracking-[0.2em] text-primary-foreground/60 mb-4">
-              Curriculum Vitae
-            </p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
-              Sara Gonçalves Pedro Parente Mendes
+              Sara Mendes
             </h1>
             <div className="w-16 h-0.5 bg-accent mb-6" />
             <div className="flex flex-wrap gap-4 text-sm text-primary-foreground/70 font-body mb-8">
               <span className="flex items-center gap-1.5">
                 <GraduationCap className="w-4 h-4" />
-                Professora Auxiliar
+                {t("Professora Auxiliar", "Assistant Professor")}
               </span>
               <span className="flex items-center gap-1.5">
                 <MapPin className="w-4 h-4" />
-                Universidade de Lisboa – Faculdade de Letras
+                {t("Universidade de Lisboa – Faculdade de Letras", "University of Lisbon – Faculty of Arts")}
               </span>
               <span className="flex items-center gap-1.5">
                 <BookOpen className="w-4 h-4" />
-                Linguística Computacional & Tradução
+                {t("Linguística Computacional & Tradução", "Computational Linguistics & Translation")}
               </span>
             </div>
             <p className="text-primary-foreground/80 font-body text-base leading-relaxed max-w-2xl">
-              Doutoramento em Linguística Computacional (2010) pela Universidade de Lisboa. Diretora do Mestrado em Tradução e Coordenadora científica do curso de "Tradução e Tecnologias de Informação Linguística" do Camões, I.P. Investigadora no Centro de Linguística da Universidade de Lisboa, com trabalho nas áreas de semântica lexical computacional, tradução automática, pós-edição e recursos linguísticos.
+              {t(
+                "Doutoramento em Linguística Computacional (2010) pela Universidade de Lisboa. Diretora do Mestrado em Tradução e Coordenadora científica do curso de \"Tradução e Tecnologias de Informação Linguística\" do Camões, I.P. Investigadora no Centro de Linguística da Universidade de Lisboa, com trabalho nas áreas de semântica lexical computacional, tradução automática, pós-edição e recursos linguísticos.",
+                "PhD in Computational Linguistics (2010) from the University of Lisbon. Director of the Master's in Translation and Scientific Coordinator of the \"Translation and Linguistic Information Technologies\" course at Camões, I.P. Researcher at the Linguistics Centre of the University of Lisbon, working in computational lexical semantics, machine translation, post-editing, and linguistic resources."
+              )}
             </p>
           </div>
         </div>
         <nav className="mt-12 flex flex-wrap gap-3 font-body text-sm">
-          {["Formação", "Percurso", "Publicações", "Projetos", "Orientações", "Distinções"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ç/g, "c")}`}
-              className="px-4 py-2 border border-primary-foreground/20 rounded-full hover:bg-primary-foreground/10 transition-colors"
-            >
-              {item}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const label = t(item.pt, item.en);
+            const href = item.pt.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ç/g, "c");
+            return (
+              <a
+                key={item.pt}
+                href={`#${href}`}
+                className="px-4 py-2 border border-primary-foreground/20 rounded-full hover:bg-primary-foreground/10 transition-colors"
+              >
+                {label}
+              </a>
+            );
+          })}
         </nav>
       </div>
     </header>

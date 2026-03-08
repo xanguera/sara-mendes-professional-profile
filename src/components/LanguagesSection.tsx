@@ -1,18 +1,22 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
 const LanguagesSection = () => {
+  const { t } = useLanguage();
+
   const languages = [
-    { lang: "Português", level: "C2", pct: 100 },
-    { lang: "Inglês", level: "C2", pct: 100 },
-    { lang: "Francês", level: "C1", pct: 85 },
-    { lang: "Espanhol", level: "C1/C2", pct: 90 },
-    { lang: "Catalão", level: "C1/C2", pct: 85 },
-    { lang: "Russo", level: "A1", pct: 15 },
+    { lang: t("Português", "Portuguese"), level: "C2", pct: 100 },
+    { lang: t("Inglês", "English"), level: "C2", pct: 100 },
+    { lang: t("Francês", "French"), level: "C1", pct: 85 },
+    { lang: t("Espanhol", "Spanish"), level: "C1/C2", pct: 90 },
+    { lang: t("Catalão", "Catalan"), level: "C1/C2", pct: 85 },
+    { lang: t("Russo", "Russian"), level: "A1", pct: 15 },
   ];
 
   return (
-    <section className="py-20">
+    <section id="idiomas" className="py-20">
       <div className="section-container">
         <div className="section-divider" />
-        <h2 className="section-title">Idiomas</h2>
+        <h2 className="section-title">{t("Idiomas", "Languages")}</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
           {languages.map((l, i) => (
             <div key={i} className="text-center">

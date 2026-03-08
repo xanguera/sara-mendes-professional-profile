@@ -1,17 +1,21 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
 const EducationSection = () => {
+  const { t } = useLanguage();
+
   const education = [
     {
       year: "2010",
-      degree: "Doutoramento em Linguística Computacional",
-      institution: "Universidade de Lisboa – Faculdade de Letras",
+      degree: t("Doutoramento em Linguística Computacional", "PhD in Computational Linguistics"),
+      institution: t("Universidade de Lisboa – Faculdade de Letras", "University of Lisbon – Faculty of Arts"),
       thesis: "Syntax and Semantics of Adjectives in Portuguese: Analysis and Modelling",
-      grade: "Aprovado com distinção e louvor",
+      grade: t("Aprovado com distinção e louvor", "Approved with distinction and honours"),
     },
     {
       year: "2000",
-      degree: "Licenciatura em Linguística",
-      institution: "Universidade de Lisboa – Faculdade de Letras",
-      grade: "17 valores",
+      degree: t("Licenciatura em Linguística", "Bachelor's in Linguistics"),
+      institution: t("Universidade de Lisboa – Faculdade de Letras", "University of Lisbon – Faculty of Arts"),
+      grade: t("17 valores", "17/20"),
     },
   ];
 
@@ -19,7 +23,7 @@ const EducationSection = () => {
     <section id="formacao" className="py-20">
       <div className="section-container">
         <div className="section-divider" />
-        <h2 className="section-title">Formação Académica</h2>
+        <h2 className="section-title">{t("Formação Académica", "Education")}</h2>
         <div className="space-y-8">
           {education.map((item, i) => (
             <div key={i} className="timeline-item">
