@@ -1,6 +1,7 @@
-import { GraduationCap, MapPin, BookOpen, Globe } from "lucide-react";
+import { GraduationCap, MapPin, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Switch } from "@/components/ui/switch";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const HeroSection = () => {
   const { lang, setLang, t } = useLanguage();
