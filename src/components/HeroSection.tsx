@@ -41,7 +41,7 @@ const HeroSection = () => {
         <div className="flex flex-col md:flex-row items-start gap-8 md:gap-12">
           <Avatar className="w-32 h-32 md:w-40 md:h-40 border-2 border-accent/30 shadow-lg shrink-0">
             <AvatarImage
-              src="https://www.clul.ulisboa.pt/sites/default/files/styles/retrato_medio/public/pictures/2019-11/foto3.jpg"
+              src="/headshot.jpg"
               alt="Sara Mendes"
               className="object-cover"
             />
